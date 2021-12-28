@@ -1,0 +1,16 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /query-demo
+spring:
+  application:
+    name: member-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.242.50:8848
+        namespace: tod-dev
+      config:
+        file-extension: yaml
+        server-addr: 192.168.242.50:8848
+        namespace: tod-dev
