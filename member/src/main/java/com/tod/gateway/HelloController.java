@@ -6,16 +6,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    @Value("${spring.cc}")
-    private String cc;
 
-    @GetMapping("query-demo")
-    public String hello(){
-        return "ssssssssssssssssssss==========";
+    @GetMapping("demo1")
+    public String demo1() {
+        return "demo1";
     }
 
-    @GetMapping("demo")
-    public String hello2(){
-        return "ssssssssssssssssssss==========";
+    @GetMapping("demo2")
+    public String demo2() {
+        return "demo2";
+    }
+
+    @GetMapping("demo3")
+    public String demo(String param) {
+        return "demo3:" + param;
     }
 }

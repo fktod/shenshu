@@ -9,8 +9,8 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.242.50:8848
-        namespace: tod-dev
+        namespace: dev
       config:
         file-extension: yaml
         server-addr: 192.168.242.50:8848
-        namespace: tod-dev
+        namespace: dev

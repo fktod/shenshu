@@ -3,15 +3,21 @@ server:
 spring:
   application:
     name: shenshu-gateway
+  profiles:
+    active: @profiles.active@
   cloud:
     nacos:
-      discovery:
-        server-addr: 192.168.242.50:8848
-        namespace: tod-dev
       config:
         file-extension: yaml
-        server-addr: 192.168.242.50:8848
-        namespace: tod-dev
+        server-addr: @config.server-addr@
+        namespace: @config.namespace@
+        shared-configs:
+          - dataId: gateway-route.yml
+            group: DEFAULT_GROUP
+            refresh: true
+      discovery:
+        server-addr: @discovery.server-addr@
+        namespace: @discovery.namespace@
   devtools:
     livereload:
       port: 35730

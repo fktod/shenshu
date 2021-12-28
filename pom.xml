@@ -31,6 +31,33 @@
         <pagehelper.version>1.2.3</pagehelper.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>${ACTIVE_PROFILES:dev}</profiles.active>
+                <maven.test.skip>true</maven.test.skip>
+
+                <!--当前环境-->
+                <profile.name>dev</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>${CONFIG_SERVER_ADDR:192.168.242.50:8848}</config.server-addr>
+                <!--Nacos配置中心命名空间-->
+                <config.namespace>${CONFIG_NAMESPACE:dev}</config.namespace>
+                <!--Nacos配置文件组 -->
+                <config.group>${CONFIG_GROUP:DEFAULT_GROUP}</config.group>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>${DISCOVERY_SERVER_ADDR:192.168.242.50:8848}</discovery.server-addr>
+                <!--Nacos服务发现命名空间 -->
+                <discovery.namespace>${DISCOVERY_NAMESPACE:dev}</discovery.namespace>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -120,4 +147,22 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>
