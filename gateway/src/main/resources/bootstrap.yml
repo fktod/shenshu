@@ -18,6 +18,34 @@ spring:
       discovery:
         server-addr: @discovery.server-addr@
         namespace: @discovery.namespace@
+    # 网关的配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+    # 整合sentinel，配置sentinel控制台的地址
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 192.168.242.50:8080
+      datasource:
+        flow-ds:
+          nacos:
+            server-addr: @config.server-addr@
+            namespace: @discovery.namespace@
+            data-id: gw-flow
+            group-id: JXF_GROUP
+            data-type: json
+            rule-type: gw-flow
+        api-group-ds:
+          nacos:
+            server-addr: @config.server-addr@
+            namespace: @discovery.namespace@
+            data-id: gw-api-group
+            group-id: JXF_GROUP
+            data-type: json
+            rule-type: gw-api-group
   devtools:
     livereload:
       port: 35730
