@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+    @Value("${spring.cc}")
+    private String cc;
 
     @GetMapping("demo1")
     public String demo1() {

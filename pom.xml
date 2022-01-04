@@ -6,6 +6,8 @@
     <modules>
         <module>gateway</module>
         <module>member</module>
+        <module>system</module>
+        <module>oauth</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

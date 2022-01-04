@@ -1,10 +1,10 @@
 server:
-  port: 8083
+  port: 8085
   servlet:
-    context-path: /query-demo
+    context-path: /system
 spring:
   application:
-    name: member-server
+    name: shenshu-system
   profiles:
     active: @profiles.active@
   cloud:
