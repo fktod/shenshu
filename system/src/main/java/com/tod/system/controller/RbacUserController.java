@@ -2,16 +2,22 @@ package com.tod.system.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.api.ApiController;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tod.system.entity.RbacUser;
+import com.tod.system.entity.RbacUserRole;
+import com.tod.system.service.RbacUserRoleService;
 import com.tod.system.service.RbacUserService;
+import com.tod.system.utils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户表(RbacUser)表控制层
@@ -27,6 +33,8 @@ public class RbacUserController extends ApiController {
      */
     @Resource
     private RbacUserService rbacUserService;
+    @Autowired
+    private RbacUserRoleService rbacUserRoleService;
 
     /**
      * 分页查询所有数据
@@ -53,7 +61,14 @@ public class RbacUserController extends ApiController {
 
     @GetMapping("username/{username}")
     public R getByUsername(@PathVariable String username) {
-        return success(this.rbacUserService.getByUsername(username));
+        RbacUser byUsername = this.rbacUserService.getByUsername(username);
+        if (byUsername != null) {
+            List<RbacUserRole> list = rbacUserRoleService.list(Wrappers.<RbacUserRole>lambdaQuery().eq(RbacUserRole::getUserId, byUsername.getId()));
+            Map<String, Object> userMap = BeanUtils.beanToMap(byUsername);
+            userMap.put("roles", list);
+            return success(userMap);
+        }
+        return failed("账号不存在");
     }
 
     /**

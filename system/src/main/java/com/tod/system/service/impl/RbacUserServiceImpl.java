@@ -19,7 +19,7 @@ public class RbacUserServiceImpl extends ServiceImpl<RbacUserDao, RbacUser> impl
 
     public RbacUser getByUsername(String username) {
         return this.baseMapper.selectOne(Wrappers.<RbacUser>lambdaQuery()
-                .likeRight(StringUtils.isNotBlank(username),
+                .eq(StringUtils.isNotBlank(username),
                         RbacUser::getUsername,
                         username));
     }
